@@ -1,0 +1,11 @@
+clc
+close all
+clear all
+x = [9 2 3 4 5];
+b = 0;
+n = length(x);
+y = sys('z');
+for i = 1:n
+ b = b+x(i)*y(1-i);
+end
+display(b);

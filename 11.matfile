@@ -1,0 +1,144 @@
+% IIR Filter Design and Implementation 
+% IIR Filter Design and Implementation 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+% Specifications 
+Fs 
+­ 
+% Specifications 
+1000; 
+% Sampling frequency in Hz 
+Fpass 
+­ 
+Fs 
+­ 
+1000; 
+% Sampling frequency in Hz 
+100; 
+% Passband frequency in Hz 
+Fstop 
+­ 
+Fpass 
+­ 
+100; 
+% Passband frequency in Hz 
+150; 
+% Stopband frequency in Hz 
+Ap 
+­ 
+Fstop 
+­ 
+150; 
+% Stopband frequency in Hz 
+1; 
+% Passband ripple in dB 
+Ast 
+­ 
+Ap 
+­ 
+1; 
+% Passband ripple in dB 
+Ast 
+40; 
+% Stopband attenuation in dB 
+­ 
+40; 
+% Stopband attenuation in dB 
+% Design the filter
+[n, Wn] = buttord(Fpass/(Fs/2), Fstop/(Fs/2), Ap, Ast);
+[b, a] = butter(n, Wn, 'low'); 
+¥ Design the filter
+[n, Wn] = buttord(Fpass/(Fs/2), Fstop/(Fs/2), Ap, Ast);
+[b, a] = butter(n, Wn, 
+'low'); 
+% Frequency response of the designed filter
+freq2(b, 8, 1024, Fs); 
+% Frequency response of the designed filter
+freq2z(b, 0, 1024, Fs); 
+¥ plot the magnitude response
+figure;
+freq2(b, 8, 1024, Fs);
+title('Frequency Response);
+xlabel('Frequency (Hz)");
+ylabel('Magnitude (d8)');
+grid on; 
+¥ plot the magnitude response
+figure;
+freq2z(b, 0, 1024, Fs);
+title('Frequency Response);
+xlabel('Frequency (Hz)');
+ylabel('Magnitude (dB)');
+grid on; 
+¥ Impulse response of the designed filter
+figure;
+impz(b, a);
+title('Impulse Response');/
+xlabel('Time (samples));
+ylabel('Amplitude');
+rid on 
+¥ Impulse response of the designed filter
+figure;
+impz(b, a);
+title('Impulse Response');/
+xlabel('Time (samples)');
+ylabel('Amplitude');
+rid on 
+% Apply the filter to a sample signal
+t 0:1/Fs:1; 
+% Apply the filter to a sample signal
+t 0:1/Fs:1; 
+%1 second 
+signal 
+1 second signal 
+x 
+sin(2pi50t) + randn(size(t)); 
+x 
+sin(2pi50t) + randn(size(t)); % Example signal with noise 
+% Example signal with noise 
+y filter(b, a, x); 
+y filter(b, a, x); 
+% Plot the original and filtered signals
+figure;
+subplot(2,1,1);
+plot(t, 0); 
+title('original Signal');
+label('Time (s)');
+ylabel('Amplitude');
+grid on; 
+% Plot the original and filtered signals
+figure;
+subplot(2,1,1);
+plot(t, 0);
+title('original Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+grid on; 
+ 
+subplot(2,1,2);
+plot(t, y);
+title('Filtered Signal');
+label('Time (s)');
+ylabel('Amplitude');
+grid on; 
+subplot(2,1,2);
+plot(t, y);
+title('Filtered Signal');
+label('Time (s)');
+ylabel('Amplitude');
+grid on; 

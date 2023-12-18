@@ -1,0 +1,88 @@
+% Butterworth Low-pass Filter Design (Without Inbuilt Functions) 
+% Specifications 
+Fs 
+­ 
+¥ Specifications 
+1000; 
+Fs = 1000; 
+% Sampling frequency in Hz 
+% Sampling frequency in Hz 
+Fpass = 100; 
+% Passband frequency in Hz 
+Fpass
+. 100; 
+Ap 
+­ 
+¥ Passband frequency in Hz 
+1; 
+Ap = 1; 
+% Passband ripple in dB 
+% Passband ripple in dB 
+% Design the filter
+Rp = 10(A0/20); ¥ Passband ripple in linear scale 
+% Design the filter
+Rp = 10(A0/20); ¥ Passband ripple in linear scale 
+% Calculate the order of the filter
+N = ceil((log10((1/Rp2) 1)) / (2 
+10g10(Fpass/Fs))); 
+¥ Calculate the order of the filter
+N = ceil((log10((1/Rp2) - 1)) / (2 
+log10(Fpass/Fs))); 
+% Calculate the cutoff frequency
+Wc= Fpass / (Fs/2); 
+% Calculate the cutoff frequency
+Wc= Fpass / (Fs/2); 
+% Calculate the poles of the Butterworth filter
+k 1:N;
+p exp(15 pi ( 
++ N 
+1) / (2+N)); 
+% Calculate the poles of the Butterworth filter
+k 1:N;
+p = exp(lj pi 
+(2k+N-1)/ (2N)); 
+% Form the transfer function numerator and denominator
+b real(prod(-P));
+a = real(poly(P)); 
+% Form the transfer function numerator and denominator
+b real(prod(-P));
+a = real(poly(P)); 
+% Normalize the filter coefficients
+b b/ a(1);
+a = a/ a(1); 
+% Normalize the filter coefficients 
+b b/ a(1); 
+a = a/ a(1); 
+% Frequency response of the designed filter
+freqz(b, a, 1024, Fs); 
+% Frequency response of the designed filter
+freqz(b, a, 1024, Fs); 
+% Plot the magnitude response
+figure;
+freqz(b, a, 1024, Fs);
+title('Butterworth Low-pass Filter Frequency Response');
+label('Frequency (Hz)');
+ylabel('Magnitude (d8)');
+grid on; 
+% Plot the magnitude response
+figure;
+freqz(b, a, 1024, Fs);
+title('Butterworth Low-pass Filter Frequency Response');
+label('Frequency (Hz)');
+ylabel('Magnitude (d8)');
+grid on; 
+% Impulse response of the designed filter
+figure;
+impz(b, a);
+title('Butterworth Low-pass Filter Impulse Response'); 
+ 
+% Impulse response of the designed filter
+figure;
+impz(b, a);
+title('Butterworth Low-pass Filter Impulse Response');
+label('Time (samples)');
+ylabel('Amplitude');
+grid on; 
+label('Time (samples)'); 
+ylabel('Amplitude');
+grid on; 

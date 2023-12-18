@@ -1,0 +1,22 @@
+clc;
+close all;
+clear all;
+% Two input sequences
+x = input('Enter input sequence: ');
+% Plotting the input sequence
+subplot(1,2,1);
+stem(x);
+xlabel('n');
+ylabel('x(n)');
+title('Input sequence');
+% Auto-correlation of the input sequence
+z = xcorr(x, x);
+% Display the values of z
+disp('The values of z are = ');
+disp(z);
+% Plotting the auto-correlation sequence
+subplot(1,2,2);
+stem(z);
+xlabel('n');
+ylabel('z(n)');
+title('Auto-correlation of input sequence');

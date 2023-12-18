@@ -1,0 +1,11 @@
+h = [1, -0.5, 0.2];
+input_signal = randn(1, 100);
+output_signal = conv(input_signal, h, 'full');
+figure;
+subplot(2,1,1);
+stem(input_signal, 'DisplayName', 'Input Signal');
+title('Input Signal');
+subplot(2,1,2);
+stem(output_signal(1:length(input_signal)), 'DisplayName', 'Output Signal');
+title('Output Signal after FIR Filtering');
+legend('show');

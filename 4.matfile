@@ -1,0 +1,65 @@
+% Define time range
+t = -5:0.01:5;
+% Define input signal
+x = sin(2*pi*t);
+% Define low-pass filter transfer function
+G = tf([1], [1 2 1]);
+% State-space model matrices
+A = [0 1; -1 -2];
+B = [0; 1];
+C = [1 0];
+D = 0;
+sys = ss(A,B,C,D);
+% Obtain output using lsim
+y1 = lsim(G, x, t);
+y2 = lsim(sys, x, t);
+% Plot input and output signals
+figure;
+plot(t, x, 'b', 'LineWidth', 2); hold on;
+plot(t, y1, 'r', 'LineWidth', 2);
+plot(t, y2, 'g', 'LineWidth', 2);
+legend('Input signal', 'Output (Transfer Function)', 'Output (State-Space)');
+xlabel('Time (s)');
+ylabel('Amplitude');
+title('Input and Output Signals');
+% Demonstrate linearity
+x1 = sin(2*pi*t);
+x2 = cos(2*pi*t);
+y11 = lsim(G, x1, t);
+y12 = lsim(G, x2, t);
+y21 = lsim(sys, x1, t);
+y22 = lsim(sys, x2, t);
+y_sum = lsim(G, x1+x2, t);
+% Plot superposition
+figure;
+plot(t, x1, 'b--', 'LineWidth', 2); hold on;
+plot(t, x2, 'g--', 'LineWidth', 2);
+plot(t, x1+x2, 'm--', 'LineWidth', 2);
+plot(t, y_sum, 'r', 'LineWidth', 2);
+legend('x1', 'x2', 'x1+x2', 'y(x1+x2)');
+xlabel('Time (s)');
+ylabel('Amplitude');
+title('Superposition Principle');
+% Demonstrate time invariance by applying a delay
+delay = 2;
+shifted_t = t - delay;
+% Generate time-shifted input signal
+x_shifted = sin(2*pi*shifted_t);
+% Obtain output for shifted input
+y_shifted = lsim(G, x_shifted, t);
+% Plot time-shifted input and output
+figure;
+plot(t, x, 'b', 'LineWidth', 2); hold on;
+plot(t, x_shifted, 'g', 'LineWidth', 2);
+plot(t, y_shifted, 'r', 'LineWidth', 2);
+legend('Original Input', 'Shifted Input', 'Output (Shifted Input)');
+xlabel('Time (s)');
+ylabel('Amplitude');
+title('Time Invariance');
+% Significance text
+figure;
+text(0.5, 0.5, {'Linear Time-Invariant (LTI) Signal and System:', 'Signals and
+system parameters are constant.'}, ...
+ 'FontSize', 14, 'HorizontalAlignment', 'center', 'VerticalAlignment',
+'middle');
+axis off;
